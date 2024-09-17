@@ -6,7 +6,7 @@
     <title>CSF Member Application Course Checker</title>
     <header>CSF Member Application Course Checker</header>
     <subtitle>Note: This is not the application. This will just check if you qualify for CSF.</subtitle>
-    <subtitle>v2</subtitle>
+    <subtitle>v3</subtitle>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -201,71 +201,86 @@
                 // Add more as needed
             ];
             
-            const { qualificationStatus, grades, type, honors } = checkQualification(courseDropdowns, gradeDropdowns);
+            //const { qualificationStatus, grades, type, honors } = checkQualification(courseDropdowns, gradeDropdowns);
 
             let result = 'Selected Courses and Grades: \n';
             courseDropdowns.forEach((course, index) => {
                 result += `Course ${index + 1}: ${course}, Grade: ${gradeDropdowns[index]}\n`;
             });
 
-            result += qualificationStatus + "\n";
-
-            result += "Grades: " + grades.join(', ') + "\n";
-            result += "Types: " + type.join(', ') + "\n";
-            result += "Honors: " + honors.map(isHonors => isHonors ? 'TRUE' : 'FALSE').join(', ') + "\n";
+            result += checkQualification(courseDropdowns, gradeDropdowns)
 
             document.getElementById('result').innerText = result;
         }
 
         function checkQualification(courses, grades) {
-            // Check if any grade is 'D' or 'F'
-            if (grades.some(grade => grade === 'D' || grade === 'F')) {
-                return "Did not qualify";
-            }
+    // Check if any grade is 'D' or 'F'
+    if (grades.some(grade => grade === 'D' || grade === 'F')) {
+        return "Did not qualify";
+    }
+    
+    // Initialize the lists and variables
+    let types = [];
+    let honors = [];
+    let totalPoints = 0;
+    let typeACount = 0;
+    let typeABCount = 0;
+    
+    // Points mapping
+    const gradePoints = { 'A': 3, 'B': 1, 'C': 0 };
 
-            // Initialize lists
-            const type = [];
-            const honors = [];
+    // Array to keep track of points for each course
+    let coursePoints = [];
+    
+    // Iterate through courses to populate types, honors, and calculate points
+    courses.forEach((course, index) => {
+        // Find the course in the csvDict
+        let courseInfo = csvDict.find(item => item["Course Name"] === course);
+        
+        // If course is found, extract Type, Honors and calculate points
+        if (courseInfo) {
+            types.push(courseInfo["Type"]);
+            const isHonors = courseInfo["Honors"] === "TRUE";
+            honors.push(isHonors);
             
-            // Create a dictionary from CSV data for quick lookup
-            const courseDict = csvDict.reduce((acc, curr) => {
-                acc[curr['Course']] = {
-                    Type: curr['Type'],
-                    Honors: curr['Honors'] === "TRUE" // Convert 'Honors' to boolean
-                };
-                return acc;
-            }, {});
-
-            // Populate the type and honors lists
-            courses.forEach(course => {
-                const courseData = courseDict[course];
-                if (courseData) {
-                    type.push(courseData.Type);
-                    honors.push(courseData.Honors);
-                } else {
-                    // If course not found in dictionary, add default values
-                    type.push('Unknown');
-                    honors.push(false);
-                }
-            });
-
-            // Return qualification status and the lists
-            let qualificationStatus = "Qualified";
-
-            // Append additional status based on honors courses
-            honors.forEach((isHonors, index) => {
-                if (isHonors) {
-                    qualificationStatus += `, ${courses[index]} is an honors course.`;
-                }
-            });
-
-            return {
-                qualificationStatus,
-                grades,
-                type,
-                honors
-            };
+            // Calculate the points for the current grade
+            const points = gradePoints[grades[index]] || 0;
+            coursePoints.push({ index, points, type: courseInfo["Type"] });
+            
+            // Add grade points
+            totalPoints += points;
+            
+            // Add bonus point if it's an honors course
+            if (isHonors) {
+                totalPoints += 1;
+            }
+            
+            // Count types
+            if (courseInfo["Type"] === "a") typeACount++;
+            if (courseInfo["Type"] === "a" || courseInfo["Type"] === "b") typeABCount++;
+        } else {
+            // If the course is not found, add default values
+            types.push(undefined);
+            honors.push(false);
+            
+            const points = gradePoints[grades[index]] || 0;
+            coursePoints.push({ index, points, type: undefined });
+            
+            totalPoints += points;
         }
+    });
+
+    // Sort the course points and remove the one with the least contribution
+    coursePoints.sort((a, b) => b.points - a.points);
+    totalPoints -= coursePoints.pop().points; // Remove the least contributing course
+    
+    // Check if the requirements are met
+    if (typeACount < 4 || typeABCount < 7 || totalPoints < 10) {
+        return "Did not qualify";
+    }
+    
+    return { types, honors, totalPoints };
+}
 
 
         function hasDuplicates(array) {
