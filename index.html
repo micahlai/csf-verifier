@@ -6,7 +6,7 @@
     <title>CSF Member Application Course Checker</title>
     <header>CSF Member Application Course Checker</header>
     <subtitle>Note: This is not the application. This will just check if you qualify for CSF.</subtitle>
-    <subtitle>v29</subtitle>
+    <subtitle>v30</subtitle>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -287,21 +287,35 @@
             if (typeACount < 4 || typeABCount < 7 || totalPoints < 10) {
                 return `You do not qualify`;
             }
-            
+            let addedHonors = false
             let aListCP = "";
             let bListCP = "";
             let cListCP = "";
             coursePoints.forEach((coursePoint,index) => {
                 console.log(coursePoint.List)
                 if(coursePoint.list === "a"){
-                    console.log(`${courses[index]} / ${grades[index]} / ${coursePoint.points},`)
-                    aListCP += `${courses[index]} / ${grades[index]} / ${coursePoint.points},`
+                    if(!addedHonors && coursePoint.isHonors){
+                        aListCP += `${courses[index]} / ${grades[index]} / ${coursePoint.points + 1}, `
+                        addedHonors = true;
+                    }else{
+                    aListCP += `${courses[index]} / ${grades[index]} / ${coursePoint.points}, `
+                    }
                 }
                 if(coursePoint.list === "b"){
-                    bListCP += `${courses[index]} / ${grades[index]} / ${coursePoint.points},`
+                    if(!addedHonors && coursePoint.isHonors){
+                        bListCP += `${courses[index]} / ${grades[index]} / ${coursePoint.points + 1}, `
+                        addedHonors = true;
+                    }else{
+                    bListCP += `${courses[index]} / ${grades[index]} / ${coursePoint.points}, `
+                    }
                 }
                 if(coursePoint.list === "c"){
-                    cListCP += `${courses[index]} / ${grades[index]} / ${coursePoint.points},`
+                    if(!addedHonors && coursePoint.isHonors){
+                        cListCP += `${courses[index]} / ${grades[index]} / ${coursePoint.points + 1}, `
+                        addedHonors = true;
+                    }else{
+                    cListCP += `${courses[index]} / ${grades[index]} / ${coursePoint.points}, `
+                    }
                 }
             });
             
