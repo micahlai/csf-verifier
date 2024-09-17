@@ -3,17 +3,22 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CSV Dropdowns</title>
+    <title>Course and Grade Dropdowns</title>
     <style>
         body {
             font-family: Arial, sans-serif;
         }
         .container {
-            max-width: 400px;
+            max-width: 800px;
             margin: 20px auto;
         }
+        .dropdown-row {
+            display: flex;
+            justify-content: space-between;
+        }
         .form-group {
-            margin-bottom: 15px;
+            flex: 1;
+            margin-right: 15px;
         }
         label {
             margin-right: 10px;
@@ -26,39 +31,70 @@
 <body>
     <div class="container">
         <form id="myForm">
-            <div class="form-group">
-                <label for="dropdown1">Option 1:</label>
-                <select id="dropdown1"></select>
+            <div class="dropdown-row">
+                <div class="form-group">
+                    <label for="courseDropdown1">Course 1:</label>
+                    <select id="courseDropdown1"></select>
+                </div>
+                <div class="form-group">
+                    <label for="gradeDropdown1">Grade 1:</label>
+                    <select id="gradeDropdown1"></select>
+                </div>
             </div>
 
-            <div class="form-group">
-                <label for="dropdown2">Option 2:</label>
-                <select id="dropdown2"></select>
+            <div class="dropdown-row">
+                <div class="form-group">
+                    <label for="courseDropdown2">Course 2:</label>
+                    <select id="courseDropdown2"></select>
+                </div>
+                <div class="form-group">
+                    <label for="gradeDropdown2">Grade 2:</label>
+                    <select id="gradeDropdown2"></select>
+                </div>
             </div>
 
-            <div class="form-group">
-                <label for="dropdown3">Option 3:</label>
-                <select id="dropdown3"></select>
+            <div class="dropdown-row">
+                <div class="form-group">
+                    <label for="courseDropdown3">Course 3:</label>
+                    <select id="courseDropdown3"></select>
+                </div>
+                <div class="form-group">
+                    <label for="gradeDropdown3">Grade 3:</label>
+                    <select id="gradeDropdown3"></select>
+                </div>
             </div>
 
-            <div class="form-group">
-                <label for="dropdown4">Option 4:</label>
-                <select id="dropdown4"></select>
+            <div class="dropdown-row">
+                <div class="form-group">
+                    <label for="courseDropdown4">Course 4:</label>
+                    <select id="courseDropdown4"></select>
+                </div>
+                <div class="form-group">
+                    <label for="gradeDropdown4">Grade 4:</label>
+                    <select id="gradeDropdown4"></select>
+                </div>
             </div>
 
-            <div class="form-group">
-                <label for="dropdown5">Option 5:</label>
-                <select id="dropdown5"></select>
+            <div class="dropdown-row">
+                <div class="form-group">
+                    <label for="courseDropdown5">Course 5:</label>
+                    <select id="courseDropdown5"></select>
+                </div>
+                <div class="form-group">
+                    <label for="gradeDropdown5">Grade 5:</label>
+                    <select id="gradeDropdown5"></select>
+                </div>
             </div>
 
-            <div class="form-group">
-                <label for="dropdown6">Option 6:</label>
-                <select id="dropdown6"></select>
-            </div>
-
-            <div class="form-group">
-                <label for="checkbox">Agree to terms:</label>
-                <input type="checkbox" id="checkbox">
+            <div class="dropdown-row">
+                <div class="form-group">
+                    <label for="courseDropdown6">Course 6:</label>
+                    <select id="courseDropdown6"></select>
+                </div>
+                <div class="form-group">
+                    <label for="gradeDropdown6">Grade 6:</label>
+                    <select id="gradeDropdown6"></select>
+                </div>
             </div>
 
             <button type="button" onclick="handleSubmit()">Submit</button>
@@ -81,20 +117,20 @@
             return rows.map(row => row.split(','));
         }
 
-        // Populate dropdowns based on CSV data (e.g., row A)
-        function initializeDropdowns(csvData) {
-            const dropdowns = [
-                document.getElementById('dropdown1'),
-                document.getElementById('dropdown2'),
-                document.getElementById('dropdown3'),
-                document.getElementById('dropdown4'),
-                document.getElementById('dropdown5'),
-                document.getElementById('dropdown6')
+        // Populate course dropdowns based on CSV data (e.g., row A)
+        function initializeCourseDropdowns(csvData) {
+            const courseDropdowns = [
+                document.getElementById('courseDropdown1'),
+                document.getElementById('courseDropdown2'),
+                document.getElementById('courseDropdown3'),
+                document.getElementById('courseDropdown4'),
+                document.getElementById('courseDropdown5'),
+                document.getElementById('courseDropdown6')
             ];
 
             const rowA = csvData[1]; // Assuming row A is the first row of actual data after the header (index 1)
 
-            dropdowns.forEach((dropdown, index) => {
+            courseDropdowns.forEach((dropdown, index) => {
                 const option = document.createElement('option');
                 option.value = rowA[index];
                 option.text = rowA[index];
@@ -102,31 +138,59 @@
             });
         }
 
+        // Populate grade dropdowns with fixed options (A, B, C, D, F)
+        function initializeGradeDropdowns() {
+            const gradeOptions = ['A', 'B', 'C', 'D', 'F'];
+            const gradeDropdowns = [
+                document.getElementById('gradeDropdown1'),
+                document.getElementById('gradeDropdown2'),
+                document.getElementById('gradeDropdown3'),
+                document.getElementById('gradeDropdown4'),
+                document.getElementById('gradeDropdown5'),
+                document.getElementById('gradeDropdown6')
+            ];
+
+            gradeDropdowns.forEach(dropdown => {
+                gradeOptions.forEach(grade => {
+                    const option = document.createElement('option');
+                    option.value = grade;
+                    option.text = grade;
+                    dropdown.appendChild(option);
+                });
+            });
+        }
+
         // Initialize the dropdowns when the page loads
         document.addEventListener('DOMContentLoaded', async () => {
             const csvData = await fetchCSV();
-            initializeDropdowns(csvData);
+            initializeCourseDropdowns(csvData);
+            initializeGradeDropdowns();
         });
 
         // Handle form submission and display the selected values
         function handleSubmit() {
-            const dropdown1 = document.getElementById('dropdown1').value;
-            const dropdown2 = document.getElementById('dropdown2').value;
-            const dropdown3 = document.getElementById('dropdown3').value;
-            const dropdown4 = document.getElementById('dropdown4').value;
-            const dropdown5 = document.getElementById('dropdown5').value;
-            const dropdown6 = document.getElementById('dropdown6').value;
-            const checkbox = document.getElementById('checkbox').checked;
+            const courseDropdowns = [
+                document.getElementById('courseDropdown1').value,
+                document.getElementById('courseDropdown2').value,
+                document.getElementById('courseDropdown3').value,
+                document.getElementById('courseDropdown4').value,
+                document.getElementById('courseDropdown5').value,
+                document.getElementById('courseDropdown6').value
+            ];
 
-            let result = `Selected values: 
-                Option 1: ${dropdown1}, 
-                Option 2: ${dropdown2}, 
-                Option 3: ${dropdown3}, 
-                Option 4: ${dropdown4}, 
-                Option 5: ${dropdown5}, 
-                Option 6: ${dropdown6}`;
+            const gradeDropdowns = [
+                document.getElementById('gradeDropdown1').value,
+                document.getElementById('gradeDropdown2').value,
+                document.getElementById('gradeDropdown3').value,
+                document.getElementById('gradeDropdown4').value,
+                document.getElementById('gradeDropdown5').value,
+                document.getElementById('gradeDropdown6').value
+            ];
 
-            result += checkbox ? "\nYou agreed to the terms." : "\nYou didn't agree to the terms.";
+            let result = 'Selected Courses and Grades: \n';
+            courseDropdowns.forEach((course, index) => {
+                result += `Course ${index + 1}: ${course}, Grade: ${gradeDropdowns[index]}\n`;
+            })
 
             document.getElementById('result').innerText = result;
         }
