@@ -3,9 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CSF Member Application Course Checker</title>
-    <header>CSF Member Application Course Checker</header>
-    <subtitle>Note: This is not the application. This will just check if you qualify for CSF.</subtitle>
+    <title>Course and Grade Dropdowns</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -55,48 +53,11 @@
                 </div>
             </div>
 
-            <div class="dropdown-row">
-                <div class="form-group">
-                    <label for="courseDropdown3">Course 3:</label>
-                    <select id="courseDropdown3"></select>
-                </div>
-                <div class="form-group">
-                    <label for="gradeDropdown3">Grade 3:</label>
-                    <select id="gradeDropdown3"></select>
-                </div>
-            </div>
+            <!-- Add additional dropdown pairs here -->
 
-            <div class="dropdown-row">
-                <div class="form-group">
-                    <label for="courseDropdown4">Course 4:</label>
-                    <select id="courseDropdown4"></select>
-                </div>
-                <div class="form-group">
-                    <label for="gradeDropdown4">Grade 4:</label>
-                    <select id="gradeDropdown4"></select>
-                </div>
-            </div>
-
-            <div class="dropdown-row">
-                <div class="form-group">
-                    <label for="courseDropdown5">Course 5:</label>
-                    <select id="courseDropdown5"></select>
-                </div>
-                <div class="form-group">
-                    <label for="gradeDropdown5">Grade 5:</label>
-                    <select id="gradeDropdown5"></select>
-                </div>
-            </div>
-
-            <div class="dropdown-row">
-                <div class="form-group">
-                    <label for="courseDropdown6">Course 6:</label>
-                    <select id="courseDropdown6"></select>
-                </div>
-                <div class="form-group">
-                    <label for="gradeDropdown6">Grade 6:</label>
-                    <select id="gradeDropdown6"></select>
-                </div>
+            <div class="form-group">
+                <label for="checkbox">Agree to terms:</label>
+                <input type="checkbox" id="checkbox">
             </div>
 
             <button type="button" onclick="handleSubmit()">Submit</button>
@@ -184,12 +145,14 @@
                 // Add more as needed
             ];
 
+            const checkbox = document.getElementById('checkbox').checked;
 
             let result = 'Selected Courses and Grades: \n';
             courseDropdowns.forEach((course, index) => {
                 result += `Course ${index + 1}: ${course}, Grade: ${gradeDropdowns[index]}\n`;
             });
 
+            result += checkbox ? "You agreed to the terms." : "You didn't agree to the terms.";
 
             document.getElementById('result').innerText = result;
         }
