@@ -138,8 +138,8 @@
             courseDropdowns.forEach(dropdown => {
                 csvDict.forEach(course => {
                     const option = document.createElement('option');
-                    option.value = course['Course Name'];
-                    option.text = course['Course Name'];
+                    option.value = course['Course'];
+                    option.text = course['Course'];
                     dropdown.appendChild(option);
                 });
             });
@@ -159,10 +159,10 @@
             ];
 
             gradeDropdowns.forEach(dropdown => {
-                gradeOptions.forEach(Course => {
+                gradeOptions.forEach(grade => {
                     const option = document.createElement('option');
-                    option.value = Course;
-                    option.text = Course;
+                    option.value = grade;
+                    option.text = grade;
                     dropdown.appendChild(option);
                 });
             });
