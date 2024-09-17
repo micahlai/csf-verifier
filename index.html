@@ -6,7 +6,7 @@
     <title>CSF Member Application Course Checker</title>
     <header>CSF Member Application Course Checker</header>
     <subtitle>Note: This is not the application. This will just check if you qualify for CSF.</subtitle>
-    <subtitle>v6</subtitle>
+    <subtitle>v7</subtitle>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -101,6 +101,7 @@
             </div>
 
             <button type="button" onclick="handleSubmit()">Submit</button>
+            
         </form>
 
         <p id="result"></p>
@@ -208,7 +209,9 @@
                 result += `Course ${index + 1}: ${course}, Grade: ${gradeDropdowns[index]}\n`;
             });
 
-            result += checkQualification(courseDropdowns, gradeDropdowns)
+            //result += checkQualification(courseDropdowns, gradeDropdowns)
+
+            result += csvDict;
 
             document.getElementById('result').innerText = result;
         }
