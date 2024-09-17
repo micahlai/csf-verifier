@@ -106,21 +106,21 @@
     </div>
 
     <script>
-        // Fetch CSV file and parse it
-        async function fetchCSV() {
-            const response = await fetch('courses.csv'); // Assuming 'data.csv' is in the same directory
-            const data = await response.text();
-            return parseCSV(data);
+        // Parse CSV data and return a dictionary with column names as keys and arrays of row data as values
+        function parseCSVToDictionary(data) {
+            const rows = data.split('\n').map(row => row.split(','));
+            const headers = rows[0];  // Extract header row (column names)
+            const dictionary = {};
+
+            headers.forEach((header, index) => {
+                dictionary[header.trim()] = rows.slice(1).map(row => row[index].trim());  // Create a key for each header, with corresponding column data as an array
+            });
+
+            return dictionary;
         }
 
-        // Parse CSV data into an array of arrays
-        function parseCSV(data) {
-            const rows = data.split('\n');
-            return rows.map(row => row.split(','));
-        }
-
-        // Populate course dropdowns based on CSV data (e.g., row A)
-        function initializeCourseDropdowns(csvData) {
+        // Populate course dropdowns using CSV data stored in a dictionary
+        function initializeCourseDropdowns(csvDict) {
             const courseDropdowns = [
                 document.getElementById('courseDropdown1'),
                 document.getElementById('courseDropdown2'),
@@ -130,17 +130,18 @@
                 document.getElementById('courseDropdown6')
             ];
 
-            const rowA = csvData[1]; // Assuming row A is the first row of actual data after the header (index 1)
-
+            // Loop over each course dropdown and populate it with the corresponding column data
             courseDropdowns.forEach((dropdown, index) => {
-                const option = document.createElement('option');
-                option.value = rowA[index];
-                option.text = rowA[index];
-                dropdown.appendChild(option);
+                const courseKey = `Option${index + 1}`;  // Assuming column headers are 'Option1', 'Option2', etc.
+                csvDict[courseKey].forEach(course => {
+                    const option = document.createElement('option');
+                    option.value = course;
+                    option.text = course;
+                    dropdown.appendChild(option);
+                });
             });
         }
 
-        // Populate grade dropdowns with fixed options (A, B, C, D, F)
         function initializeGradeDropdowns() {
             const gradeOptions = ['A', 'B', 'C', 'D', 'F'];
             const gradeDropdowns = [
@@ -162,12 +163,15 @@
             });
         }
 
-        // Initialize the dropdowns when the page loads
-        document.addEventListener('DOMContentLoaded', async () => {
-            const csvData = await fetchCSV();
-            initializeCourseDropdowns(csvData);
+        // Fetch CSV file and initialize dropdowns
+        async function fetchAndInitialize() {
+            const response = await fetch('courses.csv');  // Assuming 'data.csv' is in the same directory
+            const data = await response.text();
+            const csvDict = parseCSVToDictionary(data);  // Convert CSV to dictionary
+
+            initializeCourseDropdowns(csvDict);
             initializeGradeDropdowns();
-        });
+        }
 
         // Handle form submission and display the selected values
         function handleSubmit() {
@@ -189,13 +193,18 @@
                 document.getElementById('gradeDropdown6').value
             ];
 
+
             let result = 'Selected Courses and Grades: \n';
             courseDropdowns.forEach((course, index) => {
                 result += `Course ${index + 1}: ${course}, Grade: ${gradeDropdowns[index]}\n`;
-            })
+            });
+
 
             document.getElementById('result').innerText = result;
         }
+
+        // Initialize dropdowns when the page loads
+        document.addEventListener('DOMContentLoaded', fetchAndInitialize);
     </script>
 </body>
 </html>
