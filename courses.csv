@@ -1,11 +1,11 @@
-Course,Type,Honors
+Course,List,Weighted
 Lit & Comp l,a,FALSE
-Lit & Comp IH,a,TRUE
+Lit & Comp IH,a,FALSE
 Lit & Comp II,a,FALSE
 Lit & Comp II H,a,TRUE
 Lit & Comp III,a,FALSE
-AP Language,a,FALSE
-AP Lit & Comp,a,FALSE
+AP Language,a,TRUE
+AP Lit & Comp,a,TRUE
 Media/Mod Plays,a,FALSE
 PopCult/Film Lit Comp,a,FALSE
 Myth/Sci Fi Comp,a,FALSE
@@ -15,62 +15,62 @@ Integrated I,a,FALSE
 Integrated IA & IB,a,FALSE
 Integrated II,a,FALSE
 Integrated III,a,FALSE
-Int. III Enh.,a,FALSE
+Int. III Enh.,a,TRUE
 Financial Algebra,a,FALSE
-Pre-Calculus,a,FALSE
-AP Calculus AB,a,FALSE
-AP Calculus BC,a,FALSE
-AP Statistics,a,FALSE
-Bio Liv Earth,a,FALSE
-AP Biology,a,FALSE
+Pre-Calculus,a,TRUE
+AP Calculus AB,a,TRUE
+AP Calculus BC,a,TRUE
+AP Statistics,a,TRUE
+"Bio, Liv Earth",a,FALSE
+AP Biology,a,TRUE
 Chemistry,a,FALSE
-Chemistry Honors,a,FALSE
-AP Chemistry,a,FALSE
+Chemistry Honors,a,TRUE
+AP Chemistry,a,TRUE
 Physics,a,FALSE
-AP Physics 1,a,FALSE
-AP Physics 2,a,FALSE
+AP Physics 1,a,TRUE
+AP Physics 2,a,TRUE
 Human Anatomy & Physiology,a,FALSE
 Environmental Sci,a,FALSE
-AP Environ. Sci,a,FALSE
+AP Environ. Sci,a,TRUE
 World History,a,FALSE
-AP World History,a,FALSE
+AP World History,a,TRUE
 US History,a,FALSE
-AP US History,a,FALSE
+AP US History,a,TRUE
 Economics,a,FALSE
-AP Economics,a,FALSE
+AP Economics,a,TRUE
 Government,a,FALSE
-AP Government,a,FALSE
+AP Government,a,TRUE
 French I,a,FALSE
 French II,a,FALSE
 French III,a,FALSE
-French III H,a,FALSE
+French III H,a,TRUE
 French IV,a,FALSE
-AP French Lang,a,FALSE
+AP French Lang,a,TRUE
 Spanish I,a,FALSE
 Spanish II,a,FALSE
 Spanish III,a,FALSE
 Spanish IV,a,FALSE
-Spanish IV H,a,FALSE
+Spanish IV H,a,TRUE
 Spanish V,a,FALSE
 Spanish/Speaker A,a,FALSE
 Spanish/Speaker B,a,FALSE
-AP Spanish Lang,a,FALSE
-AP Spanish Lit,a,FALSE
+AP Spanish Lang,a,TRUE
+AP Spanish Lit,a,TRUE
 Mandarin I,a,FALSE
 Mandarin II,a,FALSE
 Mandarin III,a,FALSE
-Mandarin IV H,a,FALSE
+Mandarin IV H,a,TRUE
 Mandarin for Mandarin Speakers,a,FALSE
-AP Chinese Lang,a,FALSE
+AP Chinese Lang,a,TRUE
 Global Studies,b,FALSE
 Journalism,b,FALSE
-AP Comp. Sci Prin.,b,FALSE
-AP Seminar,b,FALSE
-AP Research,b,FALSE
-AP Art History,b,FALSE
+AP Comp. Sci Prin.,b,TRUE
+AP Seminar,b,TRUE
+AP Research,b,TRUE
+AP Art History,b,TRUE
 Zoology,b,FALSE
-AP Music Theory,b,FALSE
-AP Psychology,b,FALSE
+AP Music Theory,b,TRUE
+AP Psychology,b,TRUE
 Int to Computer Science,b,FALSE
 Engineering and Robotics,b,FALSE
 Health Ed,c,FALSE
