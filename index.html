@@ -6,7 +6,7 @@
     <title>CSF Member Application Course Checker</title>
     <header>CSF Member Application Course Checker</header>
     <subtitle>Note: This is not the application. This will just check if you qualify for CSF.</subtitle>
-    <subtitle>v23</subtitle>
+    <subtitle>v24</subtitle>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -207,12 +207,13 @@
             
             //const { qualificationStatus, grades, type, honors } = checkQualification(courseDropdowns, gradeDropdowns);
 
-            let result = 'Selected Courses and Grades: \n';
+            //let result = 'Selected Courses and Grades: \n';
+            /* 
             courseDropdowns.forEach((course, index) => {
                 result += `Course ${index + 1}: ${course}, Grade: ${gradeDropdowns[index]}\n`;
-            });
+            }); */
 
-            result += checkQualification(courseDropdowns, gradeDropdowns)
+            let result = checkQualification(courseDropdowns, gradeDropdowns)
 
             //console.log(courseData)
 
@@ -287,6 +288,11 @@
                 return `Did not qualify. Points: ${typeACount} ${typeABCount} ${totalPoints}\n${honors}\n${types}`;
             }
             
+            //let aListCP = "";
+            
+            console.log(coursePoints)
+
+
             return `You qualify for CSF with ${totalPoints} points!\n${honors}\n${types}\nCopy and paste below:\nA List Items: ${coursePoints}`;
         }
 
