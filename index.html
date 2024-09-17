@@ -214,73 +214,73 @@
         }
 
         function checkQualification(courses, grades) {
-    // Check if any grade is 'D' or 'F'
-    if (grades.some(grade => grade === 'D' || grade === 'F')) {
-        return "Did not qualify";
-    }
-    
-    // Initialize the lists and variables
-    let types = [];
-    let honors = [];
-    let totalPoints = 0;
-    let typeACount = 0;
-    let typeABCount = 0;
-    
-    // Points mapping
-    const gradePoints = { 'A': 3, 'B': 1, 'C': 0 };
-
-    // Array to keep track of points for each course
-    let coursePoints = [];
-    
-    // Iterate through courses to populate types, honors, and calculate points
-    courses.forEach((course, index) => {
-        // Find the course in the csvDict
-        let courseInfo = csvDict.find(item => item["Course Name"] === course);
-        
-        // If course is found, extract Type, Honors and calculate points
-        if (courseInfo) {
-            types.push(courseInfo["Type"]);
-            const isHonors = courseInfo["Honors"] === "TRUE";
-            honors.push(isHonors);
-            
-            // Calculate the points for the current grade
-            const points = gradePoints[grades[index]] || 0;
-            coursePoints.push({ index, points, type: courseInfo["Type"] });
-            
-            // Add grade points
-            totalPoints += points;
-            
-            // Add bonus point if it's an honors course
-            if (isHonors) {
-                totalPoints += 1;
+            // Check if any grade is 'D' or 'F'
+            if (grades.some(grade => grade === 'D' || grade === 'F')) {
+                return "Did not qualify";
             }
             
-            // Count types
-            if (courseInfo["Type"] === "a") typeACount++;
-            if (courseInfo["Type"] === "a" || courseInfo["Type"] === "b") typeABCount++;
-        } else {
-            // If the course is not found, add default values
-            types.push(undefined);
-            honors.push(false);
+            // Initialize the lists and variables
+            let types = [];
+            let honors = [];
+            let totalPoints = 0;
+            let typeACount = 0;
+            let typeABCount = 0;
             
-            const points = gradePoints[grades[index]] || 0;
-            coursePoints.push({ index, points, type: undefined });
-            
-            totalPoints += points;
-        }
-    });
+            // Points mapping
+            const gradePoints = { 'a': 3, 'b': 1, 'c': 0 };
 
-    // Sort the course points and remove the one with the least contribution
-    coursePoints.sort((a, b) => b.points - a.points);
-    totalPoints -= coursePoints.pop().points; // Remove the least contributing course
-    
-    // Check if the requirements are met
-    if (typeACount < 4 || typeABCount < 7 || totalPoints < 10) {
-        return "Did not qualify";
-    }
-    
-    return { types, honors, totalPoints };
-}
+            // Array to keep track of points for each course
+            let coursePoints = [];
+            
+            // Iterate through courses to populate types, honors, and calculate points
+            courses.forEach((course, index) => {
+                // Find the course in the csvDict
+                let courseInfo = csvDict.find(item => item["Course"] === course);
+                
+                // If course is found, extract Type, Honors and calculate points
+                if (courseInfo) {
+                    types.push(courseInfo["Type"]);
+                    const isHonors = courseInfo["Honors"] === "TRUE";
+                    honors.push(isHonors);
+                    
+                    // Calculate the points for the current grade
+                    const points = gradePoints[grades[index]] || 0;
+                    coursePoints.push({ index, points, type: courseInfo["Type"] });
+                    
+                    // Add grade points
+                    totalPoints += points;
+                    
+                    // Add bonus point if it's an honors course
+                    if (isHonors) {
+                        totalPoints += 1;
+                    }
+                    
+                    // Count types
+                    if (courseInfo["Type"] === "a") typeACount++;
+                    if (courseInfo["Type"] === "a" || courseInfo["Type"] === "b") typeABCount++;
+                } else {
+                    // If the course is not found, add default values
+                    types.push(undefined);
+                    honors.push(false);
+                    
+                    const points = gradePoints[grades[index]] || 0;
+                    coursePoints.push({ index, points, type: undefined });
+                    
+                    totalPoints += points;
+                }
+            });
+
+            // Sort the course points and remove the one with the least contribution
+            coursePoints.sort((a, b) => b.points - a.points);
+            totalPoints -= coursePoints.pop().points; // Remove the least contributing course
+            
+            // Check if the requirements are met
+            if (typeACount < 4 || typeABCount < 7 || totalPoints < 10) {
+                return "Did not qualify";
+            }
+            
+            return { types, honors, totalPoints };
+        }
 
 
         function hasDuplicates(array) {
