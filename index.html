@@ -159,10 +159,10 @@
             ];
 
             gradeDropdowns.forEach(dropdown => {
-                gradeOptions.forEach(grade => {
+                gradeOptions.forEach(Course => {
                     const option = document.createElement('option');
-                    option.value = grade;
-                    option.text = grade;
+                    option.value = Course;
+                    option.text = Course;
                     dropdown.appendChild(option);
                 });
             });
