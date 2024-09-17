@@ -6,7 +6,7 @@
     <title>CSF Member Application Course Checker</title>
     <header>CSF Member Application Course Checker</header>
     <subtitle>Note: This is not the application. This will just check if you qualify for CSF.</subtitle>
-    <subtitle>v4</subtitle>
+    <subtitle>v5</subtitle>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -208,7 +208,7 @@
                 result += `Course ${index + 1}: ${course}, Grade: ${gradeDropdowns[index]}\n`;
             });
 
-            result += checkQualification(courseDropdowns, gradeDropdowns)
+            //result += checkQualification(courseDropdowns, gradeDropdowns)
 
             document.getElementById('result').innerText = result;
         }
@@ -227,7 +227,7 @@
             let typeABCount = 0;
             
             // Points mapping
-            const gradePoints = { 'a': 3, 'b': 1, 'c': 0 };
+            const gradePoints = { 'A': 3, 'B': 1, 'C': 0 };
 
             // Array to keep track of points for each course
             let coursePoints = [];
@@ -245,31 +245,30 @@
                     
                     // Calculate the points for the current grade
                     const points = gradePoints[grades[index]] || 0;
-                    coursePoints.push({ index, points, type: courseInfo["Type"] });
+                    coursePoints.push({ index, points, type: courseInfo["Type"], isHonors });
                     
                     // Add grade points
                     totalPoints += points;
                     
-                    // Add bonus point if it's an honors course
-                    if (isHonors) {
-                        totalPoints += 1;
-                    }
-                    
                     // Count types
-                    if (courseInfo["Type"] === "a") typeACount++;
-                    if (courseInfo["Type"] === "a" || courseInfo["Type"] === "b") typeABCount++;
+                    if (courseInfo["Type"] === "a") typeACount += points;
+                    if (courseInfo["Type"] === "a" || courseInfo["Type"] === "b") typeABCount += points;
                 } else {
                     // If the course is not found, add default values
                     types.push(undefined);
                     honors.push(false);
                     
                     const points = gradePoints[grades[index]] || 0;
-                    coursePoints.push({ index, points, type: undefined });
+                    coursePoints.push({ index, points, type: undefined, isHonors: false });
                     
                     totalPoints += points;
                 }
             });
 
+            // Calculate the total points considering honors bonus
+            const honorsBonus = honors.includes(true) ? 1 : 0;
+            totalPoints += honorsBonus;
+            
             // Sort the course points and remove the one with the least contribution
             coursePoints.sort((a, b) => b.points - a.points);
             totalPoints -= coursePoints.pop().points; // Remove the least contributing course
