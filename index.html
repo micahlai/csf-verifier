@@ -106,14 +106,18 @@
     </div>
 
     <script>
-        // Parse CSV data and return a dictionary with column names as keys and arrays of row data as values
+        // Parse CSV data and return a dictionary
         function parseCSVToDictionary(data) {
             const rows = data.split('\n').map(row => row.split(','));
             const headers = rows[0];  // Extract header row (column names)
-            const dictionary = {};
+            const dictionary = [];
 
-            headers.forEach((header, index) => {
-                dictionary[header.trim()] = rows.slice(1).map(row => row[index].trim());  // Create a key for each header, with corresponding column data as an array
+            rows.slice(1).forEach((row) => {
+                const entry = {};
+                headers.forEach((header, index) => {
+                    entry[header.trim()] = row[index].trim();  // Map column headers to row data
+                });
+                dictionary.push(entry);
             });
 
             return dictionary;
@@ -123,34 +127,27 @@
         function initializeCourseDropdowns(csvDict) {
             const courseDropdowns = [
                 document.getElementById('courseDropdown1'),
-                document.getElementById('courseDropdown2'),
-                document.getElementById('courseDropdown3'),
-                document.getElementById('courseDropdown4'),
-                document.getElementById('courseDropdown5'),
-                document.getElementById('courseDropdown6')
+                document.getElementById('courseDropdown2')
+                // Add more dropdowns as needed
             ];
 
-            // Loop over each course dropdown and populate it with the corresponding column data
-            courseDropdowns.forEach((dropdown, index) => {
-                const courseKey = `Option${index + 1}`;  // Assuming column headers are 'Option1', 'Option2', etc.
-                csvDict[courseKey].forEach(course => {
+            courseDropdowns.forEach(dropdown => {
+                csvDict.forEach(course => {
                     const option = document.createElement('option');
-                    option.value = course;
-                    option.text = course;
+                    option.value = course['Course Name'];
+                    option.text = course['Course Name'];
                     dropdown.appendChild(option);
                 });
             });
         }
 
+        // Populate grade dropdowns with fixed options (A, B, C, D, F)
         function initializeGradeDropdowns() {
             const gradeOptions = ['A', 'B', 'C', 'D', 'F'];
             const gradeDropdowns = [
                 document.getElementById('gradeDropdown1'),
-                document.getElementById('gradeDropdown2'),
-                document.getElementById('gradeDropdown3'),
-                document.getElementById('gradeDropdown4'),
-                document.getElementById('gradeDropdown5'),
-                document.getElementById('gradeDropdown6')
+                document.getElementById('gradeDropdown2')
+                // Add more dropdowns as needed
             ];
 
             gradeDropdowns.forEach(dropdown => {
@@ -177,20 +174,14 @@
         function handleSubmit() {
             const courseDropdowns = [
                 document.getElementById('courseDropdown1').value,
-                document.getElementById('courseDropdown2').value,
-                document.getElementById('courseDropdown3').value,
-                document.getElementById('courseDropdown4').value,
-                document.getElementById('courseDropdown5').value,
-                document.getElementById('courseDropdown6').value
+                document.getElementById('courseDropdown2').value
+                // Add more as needed
             ];
 
             const gradeDropdowns = [
                 document.getElementById('gradeDropdown1').value,
-                document.getElementById('gradeDropdown2').value,
-                document.getElementById('gradeDropdown3').value,
-                document.getElementById('gradeDropdown4').value,
-                document.getElementById('gradeDropdown5').value,
-                document.getElementById('gradeDropdown6').value
+                document.getElementById('gradeDropdown2').value
+                // Add more as needed
             ];
 
 
