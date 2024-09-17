@@ -6,7 +6,7 @@
     <title>CSF Member Application Course Checker</title>
     <header>CSF Member Application Course Checker</header>
     <subtitle>Note: This is not the application. This will just check if you qualify for CSF.</subtitle>
-    <subtitle>v9</subtitle>
+    <subtitle>v10</subtitle>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -175,9 +175,15 @@
             const response = await fetch('courses.csv');  // Assuming 'data.csv' is in the same directory
             const data = await response.text();
             const csvDict = parseCSVToDictionary(data);  // Convert CSV to dictionary
+            
+            courseData = csvDict;
 
             initializeCourseDropdowns(csvDict);
             initializeGradeDropdowns();
+        }
+
+        function getCSV(){
+            return
         }
 
         // Handle form submission and display the selected values
@@ -211,7 +217,7 @@
 
             //result += checkQualification(courseDropdowns, gradeDropdowns)
 
-            console.log(csvDict)
+            console.log(courseData)
 
             document.getElementById('result').innerText = result;
         }
