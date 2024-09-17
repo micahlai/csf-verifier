@@ -6,7 +6,7 @@
     <title>CSF Member Application Course Checker</title>
     <header>CSF Member Application Course Checker</header>
     <subtitle>Note: This is not the application. This will just check if you qualify for CSF.</subtitle>
-    <subtitle>v17</subtitle>
+    <subtitle>v18</subtitle>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -268,6 +268,7 @@
                     coursePoints.push({ index, points, type: undefined, isHonors: false });
                     
                     totalPoints += points;
+                    console.log("Can't Find course")
                 }
             });
 
