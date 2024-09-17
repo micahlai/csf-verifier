@@ -6,7 +6,7 @@
     <title>CSF Member Application Course Checker</title>
     <header>CSF Member Application Course Checker</header>
     <subtitle>Note: This is not the application. This will just check if you qualify for CSF.</subtitle>
-    <subtitle>v16</subtitle>
+    <subtitle>v17</subtitle>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -281,7 +281,7 @@
             
             // Check if the requirements are met
             if (typeACount < 4 || typeABCount < 7 || totalPoints < 10) {
-                return `Did not qualify. Points: ${typeACount} ${typeABCount} ${totalPoints}`;
+                return `Did not qualify. Points: ${typeACount} ${typeABCount} ${totalPoints}\n${honors}\n${types}`;
             }
             
             return `You qualify for CSF with ${totalPoints} points!\n${honors}\n${types}\nCopy and paste below:\nA List Items: ${coursePoints}`;
