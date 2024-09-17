@@ -199,16 +199,87 @@
                 document.getElementById('gradeDropdown6').value
                 // Add more as needed
             ];
-
+            
+            const { qualificationStatus, grades, type, honors } = checkQualification(courseDropdowns, gradeDropdowns);
 
             let result = 'Selected Courses and Grades: \n';
             courseDropdowns.forEach((course, index) => {
                 result += `Course ${index + 1}: ${course}, Grade: ${gradeDropdowns[index]}\n`;
             });
 
+            result += checkbox ? "You agreed to the terms.\n" : "You didn't agree to the terms.\n";
+            result += qualificationStatus + "\n";
+
+            result += "Grades: " + grades.join(', ') + "\n";
+            result += "Types: " + type.join(', ') + "\n";
+            result += "Honors: " + honors.map(isHonors => isHonors ? 'TRUE' : 'FALSE').join(', ') + "\n";
 
             document.getElementById('result').innerText = result;
         }
+
+        function checkQualification(courses, grades) {
+            // Check if any grade is 'D' or 'F'
+            if (grades.some(grade => grade === 'D' || grade === 'F')) {
+                return "Did not qualify";
+            }
+
+            // Initialize lists
+            const type = [];
+            const honors = [];
+            
+            // Create a dictionary from CSV data for quick lookup
+            const courseDict = csvDict.reduce((acc, curr) => {
+                acc[curr['Course']] = {
+                    Type: curr['Type'],
+                    Honors: curr['Honors'] === "TRUE" // Convert 'Honors' to boolean
+                };
+                return acc;
+            }, {});
+
+            // Populate the type and honors lists
+            courses.forEach(course => {
+                const courseData = courseDict[course];
+                if (courseData) {
+                    type.push(courseData.Type);
+                    honors.push(courseData.Honors);
+                } else {
+                    // If course not found in dictionary, add default values
+                    type.push('Unknown');
+                    honors.push(false);
+                }
+            });
+
+            // Return qualification status and the lists
+            let qualificationStatus = "Qualified";
+
+            // Append additional status based on honors courses
+            honors.forEach((isHonors, index) => {
+                if (isHonors) {
+                    qualificationStatus += `, ${courses[index]} is an honors course.`;
+                }
+            });
+
+            return {
+                qualificationStatus,
+                grades,
+                type,
+                honors
+            };
+        }
+
+
+        function hasDuplicates(array) {
+    var valuesSoFar = Object.create(null);
+    for (var i = 0; i < array.length; ++i) {
+        var value = array[i];
+        if (value in valuesSoFar) {
+            return true;
+        }
+        valuesSoFar[value] = true;
+    }
+            return false;
+        }
+
 
         // Initialize dropdowns when the page loads
         document.addEventListener('DOMContentLoaded', fetchAndInitialize);

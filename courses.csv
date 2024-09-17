@@ -1,27 +1,68 @@
 Course,List,Weighted
 Lit & Comp l,a,FALSE
+Lit & Comp IH,a,TRUE
 Lit & Comp II,a,FALSE
-Lit & Comp II H,a,FALSE
+Lit & Comp II H,a,TRUE
 Lit & Comp III,a,FALSE
 AP Language,a,FALSE
 AP Lit & Comp,a,FALSE
 Media/Mod Plays,a,FALSE
 PopCult/Film Lit Comp,a,FALSE
-Myth/Sci Fi Comp,a,TRUE
+Myth/Sci Fi Comp,a,FALSE
+Sci Fi/19th Century Comp,a,FALSE
 General Math,a,FALSE
 Integrated I,a,FALSE
-Integrated II,a,TRUE
+Integrated IA & IB,a,FALSE
+Integrated II,a,FALSE
 Integrated III,a,FALSE
-Data Science,a,FALSE
 Int. III Enh.,a,FALSE
 Financial Algebra,a,FALSE
 Pre-Calculus,a,FALSE
-AP Calculus AB,a,TRUE
+AP Calculus AB,a,FALSE
 AP Calculus BC,a,FALSE
 AP Statistics,a,FALSE
 "Bio, Liv Earth",a,FALSE
-AP Biology,a,TRUE
+AP Biology,a,FALSE
 Chemistry,a,FALSE
+Chemistry Honors,a,FALSE
+AP Chemistry,a,FALSE
+Physics,a,FALSE
+AP Physics 1,a,FALSE
+AP Physics 2,a,FALSE
+Human Anatomy & Physiology,a,FALSE
+Environmental Sci,a,FALSE
+AP Environ. Sci,a,FALSE
+World History,a,FALSE
+AP World History,a,FALSE
+US History,a,FALSE
+AP US History,a,FALSE
+Economics,a,FALSE
+AP Economics,a,FALSE
+Government,a,FALSE
+AP Government,a,FALSE
+French I,a,FALSE
+French II,a,FALSE
+French III,a,FALSE
+French III H,a,FALSE
+French IV,a,FALSE
+AP French Lang,a,FALSE
+Spanish I,a,FALSE
+Spanish II,a,FALSE
+Spanish III,a,FALSE
+Spanish IV,a,FALSE
+Spanish IV H,a,FALSE
+Spanish V,a,FALSE
+Spanish/Speaker A,a,FALSE
+Spanish/Speaker B,a,FALSE
+AP Spanish Lang,a,FALSE
+AP Spanish Lit,a,FALSE
+Mandarin I,a,FALSE
+Mandarin II,a,FALSE
+Mandarin III,a,FALSE
+Mandarin IV H,a,FALSE
+Mandarin for Mandarin Speakers,a,FALSE
+AP Chinese Lang,a,FALSE
+Global Studies,b,FALSE
 Journalism,b,FALSE
 AP Comp. Sci Prin.,b,FALSE
 AP Seminar,b,FALSE
@@ -29,3 +70,58 @@ AP Research,b,FALSE
 AP Art History,b,FALSE
 Zoology,b,FALSE
 AP Music Theory,b,FALSE
+AP Psychology,b,FALSE
+Int to Computer Science,b,FALSE
+Engineering and Robotics,b,FALSE
+Health Ed,c,FALSE
+Leadership,c,FALSE
+Piano I,c,FALSE
+Piano II,c,FALSE
+Yoga,c,FALSE
+Pilates,c,FALSE
+Ballet Tech I,c,FALSE
+Ballet Tech II,c,FALSE
+Ballet Tech III,c,FALSE
+Jazz Dance I,c,FALSE
+Jazz Dance II,c,FALSE
+Jazz Dance III,c,FALSE
+Tap Dance I,c,FALSE
+Tap Dance II,c,FALSE
+Tap Dance III,c,FALSE
+Ballet Folklorico I,c,FALSE
+Ballet Folklorico II,c,FALSE
+Dance Exploration,c,FALSE
+Dance Fitness,c,FALSE
+Body Conditioning,c,FALSE
+Taekwondo (Beginning),c,FALSE
+Taekwondo (Int.),c,FALSE
+Taekwondo (Adv.),c,FALSE
+Taekwondo (Black Belt),c,FALSE
+Ballroom Dancing I,c,FALSE
+Ballroom Dancing II,c,FALSE
+Ballroom Dancing III,c,FALSE
+Vocal Ensemble,c,FALSE
+Animation,c,FALSE
+Yearbook,c,FALSE
+Graphic Design Digital,c,FALSE
+Digital Painting I,c,FALSE
+Video Editing and SFX,c,FALSE
+Visual Arts Exploration,c,FALSE
+Painting,c,FALSE
+Photography I,c,FALSE
+Ceramics I,c,FALSE
+Broadcast and Social Media,c,FALSE
+AP Art & Design,c,FALSE
+Drawing/Painting I,c,FALSE
+Emergency Med. Care,c,FALSE
+Theatre Arts Exploration,c,FALSE
+Theatre Arts I,c,FALSE
+Fashion/Cost Design,c,FALSE
+Fashion/Cost Design II,c,FALSE
+MT Dance I,c,FALSE
+MT Dance II,c,FALSE
+MT Dance III,c,FALSE
+Hip Hop Dance I,c,FALSE
+Hip Hop Dance II,c,FALSE
+Culinary Basics,c,FALSE
+Culinary Basics II,c,FALSE
