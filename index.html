@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CSV Dropdowns</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+        .container {
+            max-width: 400px;
+            margin: 20px auto;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        label {
+            margin-right: 10px;
+        }
+        button {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <form id="myForm">
+            <div class="form-group">
+                <label for="dropdown1">Option 1:</label>
+                <select id="dropdown1"></select>
+            </div>
+
+            <div class="form-group">
+                <label for="dropdown2">Option 2:</label>
+                <select id="dropdown2"></select>
+            </div>
+
+            <div class="form-group">
+                <label for="dropdown3">Option 3:</label>
+                <select id="dropdown3"></select>
+            </div>
+
+            <div class="form-group">
+                <label for="dropdown4">Option 4:</label>
+                <select id="dropdown4"></select>
+            </div>
+
+            <div class="form-group">
+                <label for="dropdown5">Option 5:</label>
+                <select id="dropdown5"></select>
+            </div>
+
+            <div class="form-group">
+                <label for="dropdown6">Option 6:</label>
+                <select id="dropdown6"></select>
+            </div>
+
+            <div class="form-group">
+                <label for="checkbox">Agree to terms:</label>
+                <input type="checkbox" id="checkbox">
+            </div>
+
+            <button type="button" onclick="handleSubmit()">Submit</button>
+        </form>
+
+        <p id="result"></p>
+    </div>
+
+    <script>
+        // Fetch CSV file and parse it
+        async function fetchCSV() {
+            const response = await fetch('courses.csv'); // Assuming 'data.csv' is in the same directory
+            const data = await response.text();
+            return parseCSV(data);
+        }
+
+        // Parse CSV data into an array of arrays
+        function parseCSV(data) {
+            const rows = data.split('\n');
+            return rows.map(row => row.split(','));
+        }
+
+        // Populate dropdowns based on CSV data (e.g., row A)
+        function initializeDropdowns(csvData) {
+            const dropdowns = [
+                document.getElementById('dropdown1'),
+                document.getElementById('dropdown2'),
+                document.getElementById('dropdown3'),
+                document.getElementById('dropdown4'),
+                document.getElementById('dropdown5'),
+                document.getElementById('dropdown6')
+            ];
+
+            const rowA = csvData[1]; // Assuming row A is the first row of actual data after the header (index 1)
+
+            dropdowns.forEach((dropdown, index) => {
+                const option = document.createElement('option');
+                option.value = rowA[index];
+                option.text = rowA[index];
+                dropdown.appendChild(option);
+            });
+        }
+
+        // Initialize the dropdowns when the page loads
+        document.addEventListener('DOMContentLoaded', async () => {
+            const csvData = await fetchCSV();
+            initializeDropdowns(csvData);
+        });
+
+        // Handle form submission and display the selected values
+        function handleSubmit() {
+            const dropdown1 = document.getElementById('dropdown1').value;
+            const dropdown2 = document.getElementById('dropdown2').value;
+            const dropdown3 = document.getElementById('dropdown3').value;
+            const dropdown4 = document.getElementById('dropdown4').value;
+            const dropdown5 = document.getElementById('dropdown5').value;
+            const dropdown6 = document.getElementById('dropdown6').value;
+            const checkbox = document.getElementById('checkbox').checked;
+
+            let result = `Selected values: 
+                Option 1: ${dropdown1}, 
+                Option 2: ${dropdown2}, 
+                Option 3: ${dropdown3}, 
+                Option 4: ${dropdown4}, 
+                Option 5: ${dropdown5}, 
+                Option 6: ${dropdown6}`;
+
+            result += checkbox ? "\nYou agreed to the terms." : "\nYou didn't agree to the terms.";
+
+            document.getElementById('result').innerText = result;
+        }
+    </script>
+</body>
+</html>
