@@ -292,6 +292,7 @@
             let bListCP = "";
             let cListCP = "";
             coursePoints.forEach((coursePoint,index) => {
+                console.log(coursePoint.List)
                 if(coursePoint.List === "a"){
                     console.log(`${courses[index]} / ${grades[index]} / ${points},`)
                     aListCP += `${courses[index]} / ${grades[index]} / ${points},`
