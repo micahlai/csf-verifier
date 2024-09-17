@@ -6,7 +6,7 @@
     <title>CSF Member Application Course Checker</title>
     <header>CSF Member Application Course Checker</header>
     <subtitle>Note: This is not the application. This will just check if you qualify for CSF.</subtitle>
-    <subtitle>v25</subtitle>
+    <subtitle>v26</subtitle>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -223,7 +223,7 @@
         function checkQualification(courses, grades) {
             // Check if any grade is 'D' or 'F'
             if (grades.some(grade => grade === 'D' || grade === 'F')) {
-                return "Did not qualify";
+                return "You do not qualify";
             }
             
             // Initialize the lists and variables
@@ -285,7 +285,7 @@
             
             // Check if the requirements are met
             if (typeACount < 4 || typeABCount < 7 || totalPoints < 10) {
-                return `Did not qualify. Points: ${typeACount} ${typeABCount} ${totalPoints}\n${honors}\n${types}`;
+                return `You do not qualify`;
             }
             
             let aListCP = "";
@@ -306,7 +306,7 @@
             console.log(coursePoints)
 
 
-            return `You qualify for CSF with ${totalPoints} points!\n${honors}\n${types}\nCopy and paste below:\nA List Items: ${aListCP}\nB List Items: ${bListCP}\nC List Items: ${cListCP}`;
+            return `You qualify for CSF with ${totalPoints} points!\nCopy and paste below:\nA List Items: ${aListCP}\nB List Items: ${bListCP}\nC List Items: ${cListCP}`;
         }
 
 
