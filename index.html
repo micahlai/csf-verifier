@@ -6,7 +6,7 @@
     <title>CSF Member Application Course Checker</title>
     <header>CSF Member Application Course Checker</header>
     <subtitle>Note: This is not the application. This will just check if you qualify for CSF.</subtitle>
-    <subtitle>v22</subtitle>
+    <subtitle>v23</subtitle>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -245,20 +245,20 @@
                 
                 // If course is found, extract Type, Honors and calculate points
                 if (courseInfo) {
-                    types.push(courseInfo["Type"]);
-                    const isHonors = courseInfo["Honors"] === "TRUE";
+                    types.push(courseInfo["List"]);
+                    const isHonors = courseInfo["Weighted"] === "TRUE";
                     honors.push(isHonors);
                     
                     // Calculate the points for the current grade
                     const points = gradePoints[grades[index]] || 0;
-                    coursePoints.push({ index, points, type: courseInfo["Type"], isHonors });
+                    coursePoints.push({ index, points, type: courseInfo["List"], isHonors });
                     
                     // Add grade points
                     totalPoints += points;
                     
                     // Count types
-                    if (courseInfo["Type"] === "a") typeACount += points;
-                    if (courseInfo["Type"] === "a" || courseInfo["Type"] === "b") typeABCount += points;
+                    if (courseInfo["List"] === "a") typeACount += points;
+                    if (courseInfo["List"] === "a" || courseInfo["List"] === "b") typeABCount += points;
                     console.log(courseInfo)
                     console.log(points)
                 } else {
