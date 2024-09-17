@@ -6,7 +6,7 @@
     <title>CSF Member Application Course Checker</title>
     <header>CSF Member Application Course Checker</header>
     <subtitle>Note: This is not the application. This will just check if you qualify for CSF.</subtitle>
-    <subtitle>v27</subtitle>
+    <subtitle>v28</subtitle>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -252,7 +252,7 @@
                     
                     // Calculate the points for the current grade
                     const points = gradePoints[grades[index]] || 0;
-                    coursePoints.push({ index, points, type: courseInfo["List"], isHonors });
+                    coursePoints.push({ index, points, list: courseInfo["List"], isHonors });
                     
                     // Add grade points
                     totalPoints += points;
@@ -268,7 +268,7 @@
                     honors.push(false);
                     
                     const points = gradePoints[grades[index]] || 0;
-                    coursePoints.push({ index, points, type: undefined, isHonors: false });
+                    coursePoints.push({ index, points, list: undefined, isHonors: false });
                     
                     totalPoints += points;
                     console.log("Can't Find course")
@@ -293,14 +293,14 @@
             let cListCP = "";
             coursePoints.forEach((coursePoint,index) => {
                 console.log(coursePoint.List)
-                if(coursePoint.List === "a"){
+                if(coursePoint.list === "a"){
                     console.log(`${courses[index]} / ${grades[index]} / ${points},`)
                     aListCP += `${courses[index]} / ${grades[index]} / ${points},`
                 }
-                if(coursePoint.List === "b"){
+                if(coursePoint.list === "b"){
                     bListCP += `${courses[index]} / ${grades[index]} / ${points},`
                 }
-                if(coursePoint.List === "c"){
+                if(coursePoint.list === "c"){
                     cListCP += `${courses[index]} / ${grades[index]} / ${points},`
                 }
             });
