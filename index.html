@@ -6,7 +6,7 @@
     <title>CSF Member Application Course Checker</title>
     <header>CSF Member Application Course Checker</header>
     <subtitle>Note: This is not the application. This will just check if you qualify for CSF.</subtitle>
-    <subtitle>v28</subtitle>
+    <subtitle>v29</subtitle>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -294,14 +294,14 @@
             coursePoints.forEach((coursePoint,index) => {
                 console.log(coursePoint.List)
                 if(coursePoint.list === "a"){
-                    console.log(`${courses[index]} / ${grades[index]} / ${points},`)
-                    aListCP += `${courses[index]} / ${grades[index]} / ${points},`
+                    console.log(`${courses[index]} / ${grades[index]} / ${coursePoint.points},`)
+                    aListCP += `${courses[index]} / ${grades[index]} / ${coursePoint.points},`
                 }
                 if(coursePoint.list === "b"){
-                    bListCP += `${courses[index]} / ${grades[index]} / ${points},`
+                    bListCP += `${courses[index]} / ${grades[index]} / ${coursePoint.points},`
                 }
                 if(coursePoint.list === "c"){
-                    cListCP += `${courses[index]} / ${grades[index]} / ${points},`
+                    cListCP += `${courses[index]} / ${grades[index]} / ${coursePoint.points},`
                 }
             });
             
