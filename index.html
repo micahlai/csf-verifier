@@ -6,7 +6,7 @@
     <title>CSF Member Application Course Checker</title>
     <header>CSF Member Application Course Checker</header>
     <subtitle>Note: This is not the application. This will just check if you qualify for CSF.</subtitle>
-    <subtitle>v10</subtitle>
+    <subtitle>v11</subtitle>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -182,9 +182,6 @@
             initializeGradeDropdowns();
         }
 
-        function getCSV(){
-            return
-        }
 
         // Handle form submission and display the selected values
         function handleSubmit() {
@@ -215,9 +212,9 @@
                 result += `Course ${index + 1}: ${course}, Grade: ${gradeDropdowns[index]}\n`;
             });
 
-            //result += checkQualification(courseDropdowns, gradeDropdowns)
+            result += checkQualification(courseDropdowns, gradeDropdowns)
 
-            console.log(courseData)
+            //console.log(courseData)
 
             document.getElementById('result').innerText = result;
         }
@@ -244,7 +241,7 @@
             // Iterate through courses to populate types, honors, and calculate points
             courses.forEach((course, index) => {
                 // Find the course in the csvDict
-                let courseInfo = csvDict.find(item => item["Course"] === course);
+                let courseInfo = courseData.find(item => item["Course"] === course);
                 
                 // If course is found, extract Type, Honors and calculate points
                 if (courseInfo) {
