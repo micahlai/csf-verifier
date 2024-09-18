@@ -318,21 +318,20 @@
                         removeCourse[index].isTHEHonors = true;
                     }
                     if(rm.list == 'a'){
-                        typeACount += rm.points;
-                        typeABCount += rm.points;
-                        totalPoints += rm.points;
+                        typeACount += rm.points + removeCourse[index].isTHEHonors ? 1 : 0;
+                        typeABCount += rm.points + removeCourse[index].isTHEHonors ? 1 : 0;
                     }else if(rm.list == 'b'){
-                        typeABCount += rm.points;
-                        totalPoints += rm.points;
+                        typeABCount += rm.points + removeCourse[index].isTHEHonors ? 1 : 0;
                     }
                     
-                    totalPoints += rm.points;
+                    totalPoints += rm.points + removeCourse[index].isTHEHonors ? 1 : 0;
                 });
                 console.log(coursePoint)
                 console.log(removeCourse)
                 console.log(`${typeACount}, ${typeABCount}, ${totalPoints}`)
 
                 if (typeACount >= 4 && typeABCount >= 7 && totalPoints >= 10) {
+                    console.log("oiasjdaoisjdoais")
                     return removeCourse;
                 }
                 
