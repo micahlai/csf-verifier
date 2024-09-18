@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CSF Member Application Course Checker</title>
-    <h1>CSF Member Application Course Checker</h1>
+    <title>CSF Member Application Qualification Calculator</title>
+    <h1>CSF Member Application Qualification Calculator</h1>
     <subtitle>Note: This is not the application. This will just check if you qualify for CSF.</subtitle>
     <style>
         body {
@@ -171,7 +171,7 @@
 
         // Fetch CSV file and initialize dropdowns
         async function fetchAndInitialize() {
-            console.log("This is v64")
+            console.log("This is v65")
 
             const response = await fetch('courses.csv');  // Assuming 'data.csv' is in the same directory
             const data = await response.text();
@@ -301,6 +301,13 @@
                 totalPoints += pointValue;
                 
             });
+
+            if(bListCP == ""){
+                bListCP = "n/a"
+            }
+            if(cListCP == ""){
+                cListCP = "n/a"
+            }
             
             //console.log(coursePoints)
             
@@ -326,6 +333,7 @@
                 let typeABCount = 0;
 
                 let addedHonors = 0;
+                console.log(removeCourse)
                 removeCourse.forEach((rm,index) => {
                     let addForHonors = false;
                     if(addedHonors < 2 && rm.isHonors){
