@@ -171,7 +171,7 @@
 
         // Fetch CSV file and initialize dropdowns
         async function fetchAndInitialize() {
-            console.log("This is v63")
+            console.log("This is v64")
 
             const response = await fetch('courses.csv');  // Assuming 'data.csv' is in the same directory
             const data = await response.text();
@@ -255,7 +255,7 @@
                     
                     // Calculate the points for the current grade
                     const points = gradePoints[grades[index]] || 0;
-                    coursePoints.push({ index, points, list: courseInfo["List"], isHonors, isTHEHonors:false, honorsToAddPoint : false});
+                    coursePoints.push({ index, points, list: courseInfo["List"], isHonors, isTHEHonors:false});
                     
                 } else {
                     // If the course is not found, add default values
@@ -263,7 +263,7 @@
                     honors.push(false);
                     
                     const points = gradePoints[grades[index]] || 0;
-                    coursePoints.push({ index, points, list: undefined, isHonors: false, isTHEHonors:false, honorsToAddPoint : false });
+                    coursePoints.push({ index, points, list: undefined, isHonors: false, isTHEHonors:false });
                     
                     totalPoints += points;
                     console.log("Can't Find course")
@@ -285,7 +285,7 @@
             finalResult.forEach((finalResultCourse,index) => {
                 console.log(finalResultCourse.list)
                 let pointValue = finalResultCourse.points
-                if(finalResultCourse.isTHEHonors && finalResultCourse.honorsToAddPoint){
+                if(finalResultCourse.isTHEHonors){
                     pointValue += 1;
                 }
 
@@ -350,7 +350,8 @@
                         if(addForHonors){
                             totalPoints += 1;
                             removeCourse[index].isTHEHonors = true;
-                            removeCourse[index].honorsToAddPoint = true;
+                            console.log(index)
+                            console.log(removeCourse[index])
                         }else if(rm.points == 0){
                             hasAZeroPointer = true;
                         }
