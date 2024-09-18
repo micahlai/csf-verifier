@@ -6,7 +6,7 @@
     <title>CSF Member Application Course Checker</title>
     <header>CSF Member Application Course Checker</header>
     <subtitle>Note: This is not the application. This will just check if you qualify for CSF.</subtitle>
-    <subtitle>v35</subtitle>
+    <subtitle>v36</subtitle>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -267,7 +267,7 @@
             let finalResult = getQualificationAfterRestriction(coursePoints)
             
 
-            if (typeof finalResult == String) {
+            if (finalResult === "no qual") {
                 return `You do not qualify`;
             }
             console.log(finalResult);
@@ -295,7 +295,9 @@
         function getQualificationAfterRestriction(coursePoints){
             
             coursePoints.forEach((coursePoint,index) => {
-                let removeCourse = coursePoints.filter(x => x !== coursePoint);
+                let removeCourse = coursePoints
+
+                removeCourse.splice(index, 1)
 
                 let totalPoints = 0;
                 let typeACount = 0;
@@ -326,7 +328,7 @@
                 }
                 
             });
-            return "You do not qualify."
+            return "no qual"
         }
 
 
