@@ -171,7 +171,7 @@
 
         // Fetch CSV file and initialize dropdowns
         async function fetchAndInitialize() {
-            console.log("This is v58")
+            console.log("This is v59")
 
             const response = await fetch('courses.csv');  // Assuming 'data.csv' is in the same directory
             const data = await response.text();
@@ -325,11 +325,11 @@
                 let typeACount = 0;
                 let typeABCount = 0;
 
-                let addHonors = false;
+                let addHonors = true;
                 removeCourse.forEach((rm,index) => {
                     let addForHonors = false;
-                    if(!addHonors && rm.isHonors){
-                        addHonors = true;
+                    if(addHonors && rm.isHonors){
+                        addHonors = false;
                         removeCourse[index].isTHEHonors = true;
                         addForHonors = true;
                     }
