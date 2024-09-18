@@ -6,7 +6,7 @@
     <title>CSF Member Application Course Checker</title>
     <header>CSF Member Application Course Checker</header>
     <subtitle>Note: This is not the application. This will just check if you qualify for CSF.</subtitle>
-    <subtitle>v50</subtitle>
+    <subtitle>v51</subtitle>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -283,20 +283,22 @@
             let totalPoints = 0;
             finalResult.forEach((coursePoint,index) => {
                 console.log(coursePoint.list)
-                
+                let pointValue = coursePoint.points
+                if(coursePoint.isTHEHonors){
+                    pointValue += 1;
+                }
+
                 if(coursePoint.list === "a"){
-                    aListCP += `${courses[index]} / ${grades[index]} / ${coursePoint.points + coursePoint.isTHEHonors ? 1 : 0}, `
+                    aListCP += `${courses[index]} / ${grades[index]} / ${pointValue}, `
                 }
                 if(coursePoint.list === "b"){
-                    bListCP += `${courses[index]} / ${grades[index]} / ${coursePoint.points + coursePoint.isTHEHonors ? 1 : 0}, `
+                    bListCP += `${courses[index]} / ${grades[index]} / ${pointValue}, `
                 }
                 if(coursePoint.list === "c"){
-                    cListCP += `${courses[index]} / ${grades[index]} / ${coursePoint.points + coursePoint.isTHEHonors ? 1 : 0}, `
+                    cListCP += `${courses[index]} / ${grades[index]} / ${pointValue}, `
                 }
-                totalPoints += coursePoint.points;
-                if(coursePoint.isTHEHonors){
-                    totalPoints += 1;
-                }
+                totalPoints += pointValue;
+                
             });
             
             //console.log(coursePoints)
