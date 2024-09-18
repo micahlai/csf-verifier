@@ -6,7 +6,6 @@
     <title>CSF Member Application Course Checker</title>
     <header>CSF Member Application Course Checker</header>
     <subtitle>Note: This is not the application. This will just check if you qualify for CSF.</subtitle>
-    <subtitle>v53</subtitle>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -172,6 +171,8 @@
 
         // Fetch CSV file and initialize dropdowns
         async function fetchAndInitialize() {
+            console.log("This is v54")
+
             const response = await fetch('courses.csv');  // Assuming 'data.csv' is in the same directory
             const data = await response.text();
             const csvDict = parseCSVToDictionary(data);  // Convert CSV to dictionary
