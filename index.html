@@ -6,7 +6,7 @@
     <title>CSF Member Application Course Checker</title>
     <header>CSF Member Application Course Checker</header>
     <subtitle>Note: This is not the application. This will just check if you qualify for CSF.</subtitle>
-    <subtitle>v31</subtitle>
+    <subtitle>v32</subtitle>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -271,35 +271,19 @@
                 return `You do not qualify`;
             }
 
-            let addedHonors = false
             let aListCP = "";
             let bListCP = "";
             let cListCP = "";
             finalResult.forEach((coursePoint,index) => {
                 console.log(coursePoint.list)
                 if(coursePoint.list === "a"){
-                    if(!addedHonors && coursePoint.isHonors){
-                        aListCP += `${courses[index]} / ${grades[index]} / ${coursePoint.points + 1}, `
-                        addedHonors = true;
-                    }else{
-                    aListCP += `${courses[index]} / ${grades[index]} / ${coursePoint.points}, `
-                    }
+                    aListCP += `${courses[index]} / ${grades[index]} / ${coursePoint.points + coursePoint.isTHEHonors ? 1 : 0}, `
                 }
                 if(coursePoint.list === "b"){
-                    if(!addedHonors && coursePoint.isHonors){
-                        bListCP += `${courses[index]} / ${grades[index]} / ${coursePoint.points + 1}, `
-                        addedHonors = true;
-                    }else{
-                    bListCP += `${courses[index]} / ${grades[index]} / ${coursePoint.points}, `
-                    }
+                    bListCP += `${courses[index]} / ${grades[index]} / ${coursePoint.points + coursePoint.isTHEHonors ? 1 : 0}, `
                 }
                 if(coursePoint.list === "c"){
-                    if(!addedHonors && coursePoint.isHonors){
-                        cListCP += `${courses[index]} / ${grades[index]} / ${coursePoint.points + 1}, `
-                        addedHonors = true;
-                    }else{
-                    cListCP += `${courses[index]} / ${grades[index]} / ${coursePoint.points}, `
-                    }
+                    cListCP += `${courses[index]} / ${grades[index]} / ${coursePoint.points + coursePoint.isTHEHonors ? 1 : 0}, `
                 }
             });
             
@@ -325,12 +309,12 @@
                             typeABCount += 1;
                             totalPoints += 1;
                             addHonors = true
-                            removeCourse[index].isHonors = true;
+                            removeCourse[index].isTHEHonors = true;
                         }else if(rm.list === "b"){
                             typeABCount += 1;
                             totalPoints += 1;
                             addHonors = true
-                            removeCourse[index].isHonors = true;
+                            removeCourse[index].isTHEHonors = true;
                         }
                     }
                     totalPoints += rm.points;
