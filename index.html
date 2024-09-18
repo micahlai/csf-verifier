@@ -308,10 +308,11 @@
         }
         function getQualificationAfterRestriction(coursePoints){
             
+            let zeroPointer = [];
+            
             for (let i = 0; i < coursePoints.length; i++) {
                 
                 let hasAZeroPointer = false;
-                let zeroPointer = [];
 
                 let removeCourse = coursePoints.filter(function(e) { return e !== coursePoints[i]})
 
@@ -366,7 +367,7 @@
                 }
                 
             }
-            if(hasAZeroPointer){
+            if(zeroPointer != []){
                 return zeroPointer;
             }else{
                 return "no qual"
