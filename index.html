@@ -6,7 +6,7 @@
     <title>CSF Member Application Course Checker</title>
     <header>CSF Member Application Course Checker</header>
     <subtitle>Note: This is not the application. This will just check if you qualify for CSF.</subtitle>
-    <subtitle>v30</subtitle>
+    <subtitle>v31</subtitle>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -229,9 +229,6 @@
             // Initialize the lists and variables
             let types = [];
             let honors = [];
-            let totalPoints = 0;
-            let typeACount = 0;
-            let typeABCount = 0;
             
             // Points mapping
             const gradePoints = { 'A': 3, 'B': 1, 'C': 0 };
@@ -252,47 +249,34 @@
                     
                     // Calculate the points for the current grade
                     const points = gradePoints[grades[index]] || 0;
-                    coursePoints.push({ index, points, list: courseInfo["List"], isHonors });
+                    coursePoints.push({ index, points, list: courseInfo["List"], isHonors, isTHEHonors:false });
                     
-                    // Add grade points
-                    totalPoints += points;
-                    
-                    // Count types
-                    if (courseInfo["List"] === "a") typeACount += points;
-                    if (courseInfo["List"] === "a" || courseInfo["List"] === "b") typeABCount += points;
-                    //console.log(courseInfo)
-                    //console.log(points)
                 } else {
                     // If the course is not found, add default values
                     types.push(undefined);
                     honors.push(false);
                     
                     const points = gradePoints[grades[index]] || 0;
-                    coursePoints.push({ index, points, list: undefined, isHonors: false });
+                    coursePoints.push({ index, points, list: undefined, isHonors: false, isTHEHonors:false });
                     
                     totalPoints += points;
                     console.log("Can't Find course")
                 }
             });
 
-            // Calculate the total points considering honors bonus
-            const honorsBonus = honors.includes(true) ? 1 : 0;
-            totalPoints += honorsBonus;
+            let finalResult = getQualificationAfterRestriction(coursePoints)
             
-            // Sort the course points and remove the one with the least contribution
-            coursePoints.sort((a, b) => b.points - a.points);
-            totalPoints -= coursePoints.pop().points; // Remove the least contributing course
-            
-            // Check if the requirements are met
-            if (typeACount < 4 || typeABCount < 7 || totalPoints < 10) {
+
+            if (typeof finalResult == String) {
                 return `You do not qualify`;
             }
+
             let addedHonors = false
             let aListCP = "";
             let bListCP = "";
             let cListCP = "";
-            coursePoints.forEach((coursePoint,index) => {
-                console.log(coursePoint.List)
+            finalResult.forEach((coursePoint,index) => {
+                console.log(coursePoint.list)
                 if(coursePoint.list === "a"){
                     if(!addedHonors && coursePoint.isHonors){
                         aListCP += `${courses[index]} / ${grades[index]} / ${coursePoint.points + 1}, `
@@ -323,6 +307,42 @@
 
 
             return `You qualify for CSF with ${totalPoints} points!\nCopy and paste below:\nA List Items: ${aListCP}\nB List Items: ${bListCP}\nC List Items: ${cListCP}`;
+        }
+        function getQualificationAfterRestriction(coursePoint){
+            
+            coursePoints.forEach((coursePoint,index) => {
+                let removeCourse = coursePoints.filter(x => x !== coursePoint);
+
+                let totalPoints = 0;
+                let typeACount = 0;
+                let typeABCount = 0;
+
+                let addHonors = false;
+                removeCourse.forEach((rm,index) => {
+                    if(!addHonors && rm.isHonors){
+                        if(rm.list === "a"){
+                            typeACount += 1;
+                            typeABCount += 1;
+                            totalPoints += 1;
+                            addHonors = true
+                            removeCourse[index].isHonors = true;
+                        }else if(rm.list === "b"){
+                            typeABCount += 1;
+                            totalPoints += 1;
+                            addHonors = true
+                            removeCourse[index].isHonors = true;
+                        }
+                    }
+                    totalPoints += rm.points;
+                });
+                console.log(`${coursePoint} : ${typeACount}, ${typeABCount}, ${totalPoints}`)
+
+                if (typeACount >= 4 && typeABCount >= 7 && totalPoints >= 10) {
+                    return removeCourse;
+                }
+                
+            });
+            return "You do not qualify."
         }
 
 
