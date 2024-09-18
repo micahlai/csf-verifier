@@ -171,7 +171,7 @@
 
         // Fetch CSV file and initialize dropdowns
         async function fetchAndInitialize() {
-            console.log("This is v65")
+            console.log("This is v66")
 
             const response = await fetch('courses.csv');  // Assuming 'data.csv' is in the same directory
             const data = await response.text();
@@ -316,11 +316,9 @@
         }
         function getQualificationAfterRestriction(coursePoints){
             
-            let zeroPointer = "";
             
             for (let i = 0; i < coursePoints.length; i++) {
                 
-                let hasAZeroPointer = false;
 
                 let removeCourse = coursePoints.filter(function(e) { return e !== coursePoints[i]})
 
@@ -360,8 +358,6 @@
                             removeCourse[index].isTHEHonors = true;
                             console.log(index)
                             console.log(removeCourse[index])
-                        }else if(rm.points == 0){
-                            hasAZeroPointer = true;
                         }
                 });
                 console.log(coursePoints[i])
@@ -370,19 +366,12 @@
 
                 if (typeACount >= 4 && typeABCount >= 7 && totalPoints >= 10) {
                     console.log("Qualify")
-                    if(!hasAZeroPointer){
-                        return removeCourse;
-                    }else{
-                        zeroPointer = removeCourse;
-                    }
+                    return removeCourse;
                 }
                 
             }
-            if(zeroPointer != ""){
-                return zeroPointer;
-            }else{
-                return "no qual"
-            }
+            return "no qual"
+            
         }
 
 
