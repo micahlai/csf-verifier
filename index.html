@@ -6,7 +6,7 @@
     <title>CSF Member Application Course Checker</title>
     <header>CSF Member Application Course Checker</header>
     <subtitle>Note: This is not the application. This will just check if you qualify for CSF.</subtitle>
-    <subtitle>v40</subtitle>
+    <subtitle>v41</subtitle>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -222,9 +222,14 @@
 
         function checkQualification(courses, grades) {
             // Check if any grade is 'D' or 'F'
+            if(hasDuplicates(courses)){
+                return "Duplicate courses entered"
+            }
+
             if (grades.some(grade => grade === 'D' || grade === 'F')) {
                 return "You do not qualify";
             }
+            
             
             // Initialize the lists and variables
             let types = [];
@@ -332,15 +337,16 @@
         }
 
 
-        function hasDuplicates(array) {
-    var valuesSoFar = Object.create(null);
-    for (var i = 0; i < array.length; ++i) {
-        var value = array[i];
-        if (value in valuesSoFar) {
-            return true;
-        }
-        valuesSoFar[value] = true;
-    }
+        function hasDuplicates(arr) {
+            var counts = [];
+
+            for (var i = 0; i <= arr.length; i++) {
+                if (counts[arr[i]] === undefined) {
+                    counts[arr[i]] = 1;
+                } else {
+                    return true;
+                }
+            }
             return false;
         }
 
