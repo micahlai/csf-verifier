@@ -171,7 +171,7 @@
 
         // Fetch CSV file and initialize dropdowns
         async function fetchAndInitialize() {
-            console.log("This is v60")
+            console.log("This is v61")
 
             const response = await fetch('courses.csv');  // Assuming 'data.csv' is in the same directory
             const data = await response.text();
@@ -282,21 +282,21 @@
             let cListCP = "";
 
             let totalPoints = 0;
-            finalResult.forEach((coursePoint,index) => {
-                console.log(coursePoint.list)
-                let pointValue = coursePoint.points
-                if(coursePoint.isTHEHonors){
+            finalResult.forEach((finalResultCourse,index) => {
+                console.log(finalResultCourse.list)
+                let pointValue = finalResultCourse.points
+                if(finalResultCourse.isTHEHonors){
                     pointValue += 1;
                 }
 
-                if(coursePoint.list === "a"){
-                    aListCP += `${courses[coursePoint.index]} / ${grades[coursePoint.index]} / ${pointValue}, `
+                if(finalResultCourse.list === "a"){
+                    aListCP += `${courses[finalResultCourse.index]} / ${grades[finalResultCourse.index]} / ${pointValue}, `
                 }
-                if(coursePoint.list === "b"){
-                    bListCP += `${courses[coursePoint.index]} / ${grades[coursePoint.index]} / ${pointValue}, `
+                if(finalResultCourse.list === "b"){
+                    bListCP += `${courses[finalResultCourse.index]} / ${grades[finalResultCourse.index]} / ${pointValue}, `
                 }
-                if(coursePoint.list === "c"){
-                    cListCP += `${courses[coursePoint.index]} / ${grades[coursePoint.index]} / ${pointValue}, `
+                if(finalResultCourse.list === "c"){
+                    cListCP += `${courses[finalResultCourse.index]} / ${grades[finalResultCourse.index]} / ${pointValue}, `
                 }
                 totalPoints += pointValue;
                 
@@ -325,11 +325,11 @@
                 let typeACount = 0;
                 let typeABCount = 0;
 
-                let addHonors = true;
+                let addedHonors = 0;
                 removeCourse.forEach((rm,index) => {
                     let addForHonors = false;
-                    if(addHonors && rm.isHonors){
-                        addHonors = false;
+                    if(addedHonors < 2 && rm.isHonors){
+                        addedHonors += 1;
                         console.log(addHonors)
                         addForHonors = true;
                     }
