@@ -6,7 +6,7 @@
     <title>CSF Member Application Course Checker</title>
     <header>CSF Member Application Course Checker</header>
     <subtitle>Note: This is not the application. This will just check if you qualify for CSF.</subtitle>
-    <subtitle>v39</subtitle>
+    <subtitle>v40</subtitle>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -305,13 +305,13 @@
                 let addHonors = false;
                 removeCourse.forEach((rm,index) => {
                     if(!addHonors && rm.isHonors){
-                        if(rm.list === "a"){
+                        if(rm.list === 'a'){
                             typeACount += 1;
                             typeABCount += 1;
                             totalPoints += 1;
                             addHonors = true
                             removeCourse[index].isTHEHonors = true;
-                        }else if(rm.list === "b"){
+                        }else if(rm.list === 'b'){
                             typeABCount += 1;
                             totalPoints += 1;
                             addHonors = true
