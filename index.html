@@ -171,7 +171,7 @@
 
         // Fetch CSV file and initialize dropdowns
         async function fetchAndInitialize() {
-            console.log("This is v59")
+            console.log("This is v60")
 
             const response = await fetch('courses.csv');  // Assuming 'data.csv' is in the same directory
             const data = await response.text();
@@ -330,7 +330,6 @@
                     let addForHonors = false;
                     if(addHonors && rm.isHonors){
                         addHonors = false;
-                        removeCourse[index].isTHEHonors = true;
                         addForHonors = true;
                     }
                     if(rm.list == 'a'){
@@ -350,6 +349,7 @@
                     totalPoints += rm.points;
                         if(addForHonors){
                             totalPoints += 1;
+                            removeCourse[index].isTHEHonors = true;
                         }else if(rm.points == 0){
                             hasAZeroPointer = true;
                         }
