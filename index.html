@@ -6,7 +6,7 @@
     <title>CSF Member Application Course Checker</title>
     <header>CSF Member Application Course Checker</header>
     <subtitle>Note: This is not the application. This will just check if you qualify for CSF.</subtitle>
-    <subtitle>v51</subtitle>
+    <subtitle>v52</subtitle>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -289,13 +289,13 @@
                 }
 
                 if(coursePoint.list === "a"){
-                    aListCP += `${courses[index]} / ${grades[index]} / ${pointValue}, `
+                    aListCP += `${courses[coursePoint.index]} / ${grades[coursePoint.index]} / ${pointValue}, `
                 }
                 if(coursePoint.list === "b"){
-                    bListCP += `${courses[index]} / ${grades[index]} / ${pointValue}, `
+                    bListCP += `${courses[coursePoint.index]} / ${grades[coursePoint.index]} / ${pointValue}, `
                 }
                 if(coursePoint.list === "c"){
-                    cListCP += `${courses[index]} / ${grades[index]} / ${pointValue}, `
+                    cListCP += `${courses[coursePoint.index]} / ${grades[coursePoint.index]} / ${pointValue}, `
                 }
                 totalPoints += pointValue;
                 
@@ -313,7 +313,7 @@
                 let removeCourse = coursePoints.filter(function(e) { return e !== coursePoints[i]})
 
                 removeCourse.sort(function(first, second) {
-                    return second.list.charCodeAt(0) - first.list.charCodeAt(0);
+                    return first.list.charCodeAt(0) - second.list.charCodeAt(0);
                 });
 
                 let totalPoints = 0;
