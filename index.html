@@ -171,7 +171,7 @@
 
         // Fetch CSV file and initialize dropdowns
         async function fetchAndInitialize() {
-            console.log("This is v55")
+            console.log("This is v6")
 
             const response = await fetch('courses.csv');  // Assuming 'data.csv' is in the same directory
             const data = await response.text();
@@ -309,7 +309,7 @@
         }
         function getQualificationAfterRestriction(coursePoints){
             
-            let zeroPointer = [];
+            let zeroPointer = "";
             
             for (let i = 0; i < coursePoints.length; i++) {
                 
@@ -368,7 +368,7 @@
                 }
                 
             }
-            if(zeroPointer != []){
+            if(zeroPointer != ""){
                 return zeroPointer;
             }else{
                 return "no qual"
