@@ -6,7 +6,7 @@
     <title>CSF Member Application Course Checker</title>
     <header>CSF Member Application Course Checker</header>
     <subtitle>Note: This is not the application. This will just check if you qualify for CSF.</subtitle>
-    <subtitle>v45</subtitle>
+    <subtitle>v46</subtitle>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -318,13 +318,13 @@
                         removeCourse[index].isTHEHonors = true;
                     }
                     if(rm.list == 'a'){
-                        typeACount += rm.points + removeCourse[index].isTHEHonors ? 1 : 0;
-                        typeABCount += rm.points + removeCourse[index].isTHEHonors ? 1 : 0;
+                        typeACount += (rm.points + removeCourse[index].isTHEHonors ? 1 : 0);
+                        typeABCount += (rm.points + removeCourse[index].isTHEHonors ? 1 : 0);
                     }else if(rm.list == 'b'){
-                        typeABCount += rm.points + removeCourse[index].isTHEHonors ? 1 : 0;
+                        typeABCount += (rm.points + removeCourse[index].isTHEHonors ? 1 : 0);
                     }
                     
-                    totalPoints += rm.points + removeCourse[index].isTHEHonors ? 1 : 0;
+                    totalPoints += (rm.points + removeCourse[index].isTHEHonors ? 1 : 0);
                 });
                 console.log(coursePoint)
                 console.log(removeCourse)
