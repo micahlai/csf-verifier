@@ -171,7 +171,7 @@
 
         // Fetch CSV file and initialize dropdowns
         async function fetchAndInitialize() {
-            console.log("This is v61")
+            console.log("This is v62")
 
             const response = await fetch('courses.csv');  // Assuming 'data.csv' is in the same directory
             const data = await response.text();
@@ -330,7 +330,6 @@
                     let addForHonors = false;
                     if(addedHonors < 2 && rm.isHonors){
                         addedHonors += 1;
-                        console.log(addHonors)
                         addForHonors = true;
                     }
                     if(rm.list == 'a'){
